@@ -8,6 +8,7 @@ interface IMenuItemProps {
 const MenuItem: React.FC<IMenuItemProps> = ({ onClick, label }) => {
   return (
     <li
+      onClick={onClick}
       className="
         px-4 
         py-3 
@@ -16,7 +17,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ onClick, label }) => {
         font-semibold
       "
     >
-      <button onClick={onClick}>{label}</button>
+      {label}
     </li>
   );
 };
