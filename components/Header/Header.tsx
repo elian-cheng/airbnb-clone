@@ -1,6 +1,7 @@
 'use client';
 import { SafeUser } from '@/types';
 import Container from '../UI/Container';
+import Categories from './components/Categories';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 import Search from './components/Search';
@@ -30,6 +31,7 @@ const Header: React.FC<IHeaderProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };
