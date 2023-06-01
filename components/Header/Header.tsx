@@ -1,10 +1,15 @@
 'use client';
+import { User } from '@prisma/client';
 import Container from '../UI/Container';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 import Search from './components/Search';
 
-const Header = () => {
+export interface IHeaderProps {
+  currentUser?: User | null;
+}
+
+const Header: React.FC<IHeaderProps> = ({ currentUser }) => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -21,7 +26,7 @@ const Header = () => {
           >
             <Logo />
             <Search />
-            <Navigation />
+            <Navigation currentUser={currentUser} />
           </div>
         </Container>
       </div>

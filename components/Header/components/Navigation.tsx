@@ -1,15 +1,19 @@
 'use client';
 import Avatar from '@/components/UI/Avatar';
+import { signOut } from 'next-auth/react';
 import { useCallback, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
 import MenuItem from './MenuItem';
 import useRegisterModal from '@/hooks/useRegisterModal';
+import useLoginModal from '@/hooks/useLoginModal';
+import { IHeaderProps } from '../Header';
 
-const Navigation = () => {
+const Navigation: React.FC<IHeaderProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
 
   const toggleOpenHandler = useCallback(() => {
     setIsOpen((value) => !value);
@@ -74,10 +78,21 @@ const Navigation = () => {
           "
         >
           <ul className="flex flex-col cursor-pointer">
-            <>
-              <MenuItem label="Login" onClick={() => {}} />
-              <MenuItem label="Sign up" onClick={registerModal.onOpen} />
-            </>
+            {currentUser ? (
+              <>
+                <MenuItem label="My trips" onClick={() => router.push('/trips')} />
+                <MenuItem label="My favorites" onClick={() => router.push('/favorites')} />
+                <MenuItem label="My reservations" onClick={() => router.push('/reservations')} />
+                <MenuItem label="My properties" onClick={() => router.push('/properties')} />
+                <MenuItem label="Airbnb your home" onClick={() => {}} />
+                <MenuItem label="Logout" onClick={() => signOut()} />
+              </>
+            ) : (
+              <>
+                <MenuItem label="Login" onClick={loginModal.onOpen} />
+                <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+              </>
+            )}
           </ul>
         </nav>
       )}
