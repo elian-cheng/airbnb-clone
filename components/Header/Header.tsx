@@ -1,12 +1,12 @@
 'use client';
-import { User } from '@prisma/client';
+import { SafeUser } from '@/types';
 import Container from '../UI/Container';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 import Search from './components/Search';
 
 export interface IHeaderProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const Header: React.FC<IHeaderProps> = ({ currentUser }) => {
