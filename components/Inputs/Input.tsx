@@ -24,6 +24,11 @@ const Input: React.FC<InputProps> = ({
   required,
   errors,
 }) => {
+  const numberInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    e.target.value = value.replace(/^0+/, '');
+  };
+
   return (
     <div className="w-full relative">
       {formatPrice && (
@@ -43,6 +48,7 @@ const Input: React.FC<InputProps> = ({
         {...register(id, { required })}
         placeholder=" "
         type={type}
+        {...(type === 'number' && { min: 1, onInput: numberInputChangeHandler })}
         className={`
           peer
           w-full

@@ -54,7 +54,7 @@ const LoginModal = () => {
     });
   };
 
-  const toggleHangler = useCallback(() => {
+  const toggleHandler = useCallback(() => {
     loginModal.onClose();
     registerModal.onOpen();
   }, [loginModal, registerModal]);
@@ -104,7 +104,7 @@ const LoginModal = () => {
         <p>
           First time using Airbnb?
           <span
-            onClick={toggleHangler}
+            onClick={toggleHandler}
             className="
               text-neutral-800
               cursor-pointer 

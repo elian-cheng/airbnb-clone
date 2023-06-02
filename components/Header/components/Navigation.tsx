@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import MenuItem from './MenuItem';
 import useRegisterModal from '@/hooks/useRegisterModal';
 import useLoginModal from '@/hooks/useLoginModal';
+import useRentModal from '@/hooks/useRentModal';
 import { IHeaderProps } from '../Header';
 
 const Navigation: React.FC<IHeaderProps> = ({ currentUser }) => {
@@ -14,15 +15,25 @@ const Navigation: React.FC<IHeaderProps> = ({ currentUser }) => {
   const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
 
   const toggleOpenHandler = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const rentHandler = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  }, [loginModal, rentModal, currentUser]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
+          onClick={rentHandler}
           className="
             hidden
             md:block
@@ -84,7 +95,7 @@ const Navigation: React.FC<IHeaderProps> = ({ currentUser }) => {
                 <MenuItem label="My favorites" onClick={() => router.push('/favorites')} />
                 <MenuItem label="My reservations" onClick={() => router.push('/reservations')} />
                 <MenuItem label="My properties" onClick={() => router.push('/properties')} />
-                <MenuItem label="Airbnb your home" onClick={() => {}} />
+                <MenuItem label="Airbnb your home" onClick={rentModal.onOpen} />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
             ) : (
