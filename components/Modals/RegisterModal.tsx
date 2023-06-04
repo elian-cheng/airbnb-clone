@@ -51,7 +51,7 @@ const RegisterModal = () => {
       });
   };
 
-  const toggleHangler = useCallback(() => {
+  const toggleHandler = useCallback(() => {
     registerModal.onClose();
     loginModal.onOpen();
   }, [registerModal, loginModal]);
@@ -113,7 +113,7 @@ const RegisterModal = () => {
         <p>
           Already have an account?
           <span
-            onClick={toggleHangler}
+            onClick={toggleHandler}
             className="
               text-neutral-800
               cursor-pointer
