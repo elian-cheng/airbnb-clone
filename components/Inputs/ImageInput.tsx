@@ -10,6 +10,7 @@ declare global {
 }
 
 const uploadPreset = 'nioii5mw';
+const uploadFolder = 'airbnb-clone';
 
 export interface ICloudinaryResponse {
   public_id: string;
@@ -58,6 +59,7 @@ const ImageInput: React.FC<IImageInputProps> = ({ onChange, value }) => {
       uploadPreset={uploadPreset}
       options={{
         maxFiles: 1,
+        folder: uploadFolder,
       }}
     >
       {({ open }) => {
